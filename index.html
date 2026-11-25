@@ -16,6 +16,11 @@
             rel="stylesheet"
         />
 
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/lenis@1.3.15/dist/lenis.css"
+        />
+
         <link rel="stylesheet" href="./assets/css/style.css" />
     </head>
     <body>
@@ -23,6 +28,7 @@
         <div class="webgl-container">
             <canvas id="webgl"></canvas>
         </div>
+        <div class="bg"></div>
 
         <!-- INTERFACE -->
         <div class="interface">
@@ -315,7 +321,7 @@
                     </button>
                 </header>
 
-                <div class="workspace-body">
+                <div class="workspace-body" data-lenis-prevent>
                     <div class="workspace-main">
                         <div class="workspace-heading">
                             <div>

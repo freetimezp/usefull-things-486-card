@@ -30,6 +30,7 @@ html {
 }
 
 body {
+    position: relative;
     min-height: 100vh;
     background: var(--bg);
     color: var(--white);
@@ -44,6 +45,26 @@ a {
 
 button {
     font: inherit;
+}
+
+.bg {
+    position: absolute;
+    inset: 0;
+
+    z-index: 1000;
+    pointer-events: none;
+
+    width: 100%;
+    height: 100%;
+
+    background: url(../images/bg.jpg);
+    background-position: center 10%;
+    background-size: cover;
+    background-attachment: fixed;
+
+    filter: hue-rotate(220deg) saturate(1.5) brightness(0.75);
+
+    opacity: 0.05;
 }
 
 /* =========================================
@@ -85,16 +106,34 @@ button {
 ========================================= */
 
 .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 90;
+
+    width: 100%;
     height: 90px;
     padding: 0 6%;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    border-bottom: 1px solid var(--line);
+    border-bottom: 1px solid rgba(0, 240, 255, 0.1);
 
-    background: rgba(5, 6, 9, 0.45);
+    background: rgba(5, 6, 9, 0.55);
     backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0);
+
+    transition:
+        height 0.35s ease,
+        background 0.35s ease,
+        border-color 0.35s ease,
+        box-shadow 0.35s ease;
+
+    pointer-events: auto;
 }
 
 .logo {
@@ -1169,12 +1208,46 @@ button {
 }
 
 /* =========================================
-   21. RESPONSIVE WORKSPACE
+   21. RESPONSIVE SYSTEM
 ========================================= */
 
-/* TABLET */
+/* =========================================
+   LARGE TABLET / SMALL DESKTOP
+========================================= */
 
-@media (max-width: 1000px) {
+@media (max-width: 1100px) {
+    .header {
+        padding-inline: 4%;
+    }
+
+    .hero {
+        padding-inline: 4%;
+    }
+
+    .experiments {
+        padding-inline: 4%;
+    }
+
+    .footer {
+        padding-inline: 4%;
+    }
+
+    .hero h1 {
+        font-size: clamp(100px, 14vw, 180px);
+    }
+
+    .experiment-grid {
+        gap: 14px;
+    }
+
+    .card-content {
+        padding: 20px 16px;
+    }
+
+    .card-content h3 {
+        font-size: clamp(25px, 2.8vw, 34px);
+    }
+
     .workspace {
         padding: 20px;
     }
@@ -1184,7 +1257,7 @@ button {
     }
 
     .workspace-body {
-        grid-template-columns: minmax(0, 1fr) 230px;
+        grid-template-columns: minmax(0, 1fr) 240px;
     }
 
     .workspace-main {
@@ -1204,144 +1277,119 @@ button {
         width: 100%;
         max-width: 260px;
     }
-
-    .experiment-grid {
-        gap: 14px;
-    }
-
-    .card-content {
-        padding: 20px 16px;
-    }
 }
 
-/* SMALL TABLET */
+/* =========================================
+   TABLET
+========================================= */
 
-@media (max-width: 760px) {
+@media (max-width: 900px) {
+    /* HEADER */
+
+    .header {
+        height: 76px;
+    }
+
+    .header-center {
+        display: none;
+    }
+
+    .navigation {
+        gap: 22px;
+    }
+
+    /* HERO */
+
+    .hero {
+        min-height: calc(100vh - 76px);
+        padding-top: 28px;
+    }
+
+    .hero-content {
+        padding-block: 70px;
+    }
+
+    .hero h1 {
+        font-size: clamp(100px, 16vw, 150px);
+    }
+
+    .hero-bottom {
+        gap: 30px;
+    }
+
+    .hero-side-label {
+        right: 1%;
+    }
+
+    .hero-footer {
+        flex-wrap: wrap;
+        gap: 25px;
+    }
+
+    /* EXPERIMENTS */
+
+    .experiments {
+        padding-block: 85px;
+    }
+
+    .experiments-intro {
+        margin-top: 75px;
+    }
+
+    .experiment-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+    }
+
+    .experiment-card .card-visual {
+        height: 250px;
+    }
+
+    .card-content h3 {
+        font-size: clamp(28px, 4vw, 38px);
+    }
+
+    /* WORKSPACE */
+
     .workspace {
-        padding: 12px;
+        padding: 16px;
     }
 
     .workspace-panel {
         max-height: 96vh;
     }
 
-    .workspace-header {
-        height: 62px;
-        padding: 0 18px;
-    }
-
     .workspace-body {
-        grid-template-columns: 1fr;
-        overflow-y: auto;
+        grid-template-columns: minmax(0, 1fr) 220px;
     }
 
     .workspace-main {
-        min-height: 560px;
         padding: 20px;
-        border-right: none;
-        border-bottom: 1px solid var(--line);
+    }
+
+    .workspace-sidebar {
+        padding: 22px 16px;
     }
 
     .workspace-heading {
         align-items: flex-start;
         flex-direction: column;
         gap: 12px;
-        margin-bottom: 20px;
     }
 
     .workspace-visual {
-        flex: none;
-        height: 380px;
         min-height: 280px;
-    }
-
-    .workspace-sidebar {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 20px;
-        padding: 24px 20px;
-    }
-
-    .sidebar-block {
-        margin-bottom: 0;
-    }
-
-    .sidebar-footer {
-        grid-column: 1 / -1;
-        margin-top: 0;
-    }
-
-    .experiment-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .experiments-intro {
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 20px;
-    }
-}
-
-/* MOBILE */
-
-@media (max-width: 520px) {
-    .workspace {
-        padding: 0;
-    }
-
-    .workspace-panel {
-        width: 100%;
-        height: 100%;
-        max-height: none;
-        border: none;
-    }
-
-    .workspace-header {
-        height: 58px;
-        padding: 0 14px;
-    }
-
-    .workspace-brand {
-        gap: 8px;
-        font-size: 9px;
-        letter-spacing: 1px;
-    }
-
-    .workspace-close {
-        gap: 8px;
-        padding: 8px;
-        font-size: 9px;
-    }
-
-    .workspace-main {
-        min-height: 540px;
-        padding: 18px 14px;
-    }
-
-    .workspace-heading h2 {
-        font-size: 38px;
-    }
-
-    .workspace-eyebrow,
-    .workspace-live {
-        font-size: 8px;
-    }
-
-    .workspace-visual {
-        height: 330px;
-        min-height: 260px;
-    }
-
-    .visual-coordinate {
-        left: 12px;
-        right: 12px;
-        font-size: 7px;
     }
 
     .workspace-controls {
         align-items: stretch;
         flex-direction: column;
-        gap: 16px;
+        gap: 18px;
+    }
+
+    .intensity-control {
+        width: 100%;
+        max-width: none;
     }
 
     .control-group {
@@ -1351,72 +1399,588 @@ button {
     .control-button {
         flex: 1;
         justify-content: center;
-        padding: 12px 10px;
-        font-size: 9px;
+    }
+}
+
+/* =========================================
+   SMALL TABLET / LARGE MOBILE
+========================================= */
+
+@media (max-width: 760px) {
+    /* HEADER */
+
+    .header {
+        height: 68px;
+        padding-inline: 5%;
+    }
+
+    .logo {
+        font-size: 22px;
+    }
+
+    .navigation {
+        gap: 16px;
+    }
+
+    .navigation a {
+        font-size: 8px;
+    }
+
+    /* HERO */
+
+    .hero {
+        min-height: auto;
+        padding: 25px 5% 24px;
+    }
+
+    .hero-content {
+        padding-block: 100px;
+    }
+
+    .hero h1 {
+        font-size: clamp(90px, 17vw, 135px);
+        letter-spacing: -4px;
+    }
+
+    .title-outline {
+        margin-left: 8%;
+    }
+
+    .title-accent {
+        margin-left: 16%;
+    }
+
+    .hero-bottom {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 30px;
+        margin-top: 55px;
+    }
+
+    .hero-description {
+        max-width: 420px;
+    }
+
+    .hero-side-label {
+        display: none;
+    }
+
+    .hero-footer {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 24px;
+    }
+
+    .scroll-indicator {
+        grid-column: 1 / -1;
+    }
+
+    /* EXPERIMENTS */
+
+    .experiments {
+        padding: 75px 5%;
+    }
+
+    .section-heading {
+        gap: 20px;
+    }
+
+    .section-heading span:last-child {
+        text-align: right;
+    }
+
+    .experiments-intro {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 20px;
+        margin-top: 65px;
+    }
+
+    .experiments-intro h2 {
+        font-size: clamp(55px, 10vw, 85px);
+    }
+
+    .experiments-intro > p {
+        max-width: 400px;
+        margin: 0;
+    }
+
+    .experiment-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 45px;
+    }
+
+    .experiment-card .card-visual {
+        height: 220px;
+    }
+
+    .card-content {
+        padding: 18px 14px;
+    }
+
+    .card-content h3 {
+        font-size: clamp(24px, 4vw, 32px);
+        white-space: normal;
+    }
+
+    .card-content p {
+        min-height: 65px;
+    }
+
+    .card-action {
+        font-size: 8px;
+    }
+
+    /* FOOTER */
+
+    .footer {
+        flex-wrap: wrap;
+        gap: 15px;
+        padding: 25px 5%;
+    }
+
+    /* WORKSPACE */
+
+    .workspace {
+        padding: 0;
+    }
+
+    .workspace-panel {
+        width: 100%;
+        height: 100%;
+        max-height: 100%;
+        border: none;
+    }
+
+    .workspace-header {
+        height: 62px;
+        padding-inline: 18px;
+    }
+
+    .workspace-body {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        min-height: 0;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+    }
+
+    .workspace-main {
+        flex: none;
+        min-height: auto;
+        padding: 24px 20px;
+        border-right: none;
+        border-bottom: 1px solid var(--line);
+    }
+
+    .workspace-heading {
+        align-items: flex-start;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-bottom: 22px;
+    }
+
+    .workspace-heading h2 {
+        font-size: clamp(34px, 7vw, 48px);
+    }
+
+    .workspace-visual {
+        flex: none;
+        width: 100%;
+        height: clamp(280px, 55vw, 400px);
+        min-height: 0;
+    }
+
+    .workspace-controls {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 22px;
+        padding-top: 20px;
+    }
+
+    .control-group {
+        width: auto;
+        flex: 1;
+    }
+
+    .control-button {
+        flex: 1;
+        padding: 12px;
     }
 
     .intensity-control {
-        width: 100%;
+        flex: 1 1 100%;
         max-width: none;
     }
 
     .workspace-sidebar {
-        grid-template-columns: 1fr;
-        padding: 22px 16px;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 22px;
+        padding: 25px 20px;
+    }
+
+    .sidebar-block {
+        min-width: 0;
+        margin-bottom: 0;
+        padding-bottom: 20px;
     }
 
     .sidebar-footer {
-        grid-column: auto;
+        grid-column: 1 / -1;
+        margin-top: 0;
+    }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 520px) {
+    .bg {
+        opacity: 0.065;
+    }
+
+    /* HEADER */
+
+    .header {
+        height: 62px;
+        padding-inline: 16px;
+    }
+
+    .logo {
+        font-size: 20px;
+    }
+
+    .navigation {
+        gap: 12px;
+    }
+
+    .navigation a {
+        font-size: 7px;
+        letter-spacing: 0.5px;
+    }
+
+    /* HERO */
+
+    .hero {
+        padding: 20px 16px 22px;
+    }
+
+    .hero-top {
+        font-size: 8px;
+    }
+
+    .hero-content {
+        padding-block: 85px;
+    }
+
+    .hero-label {
+        gap: 8px;
+        font-size: 8px;
+        letter-spacing: 1px;
+    }
+
+    .label-line {
+        width: 22px;
+        flex-shrink: 0;
+    }
+
+    .hero h1 {
+        font-size: clamp(64px, 17.5vw, 92px);
+        letter-spacing: -3px;
+        line-height: 0.82;
+    }
+
+    .title-outline {
+        margin-left: 7%;
+    }
+
+    .title-accent {
+        margin-left: 12%;
+    }
+
+    .hero-bottom {
+        margin-top: 42px;
+    }
+
+    .hero-description {
+        font-size: 10px;
+    }
+
+    .explore-button {
+        width: 100%;
+        justify-content: space-between;
+        padding: 15px 16px;
+        font-size: 9px;
+    }
+
+    .hero-footer {
+        gap: 20px 12px;
+    }
+
+    .footer-item {
+        font-size: 8px;
+    }
+
+    .footer-label {
+        font-size: 7px;
+    }
+
+    .scroll-indicator {
+        font-size: 8px;
+    }
+
+    /* EXPERIMENTS */
+
+    .experiments {
+        padding: 65px 16px;
+    }
+
+    .section-heading {
+        font-size: 7px;
+        letter-spacing: 0.5px;
+    }
+
+    .experiments-intro {
+        margin-top: 55px;
+    }
+
+    .experiments-intro .hero-label {
+        font-size: 8px;
+    }
+
+    .experiments-intro h2 {
+        font-size: clamp(48px, 12vw, 65px);
+    }
+
+    .experiments-intro > p {
+        font-size: 8px;
     }
 
     .experiment-grid {
         grid-template-columns: 1fr;
+        gap: 18px;
+        margin-top: 38px;
     }
 
     .experiment-card .card-visual {
-        height: 250px;
+        height: 245px;
+    }
+
+    .card-content {
+        padding: 22px 18px;
     }
 
     .card-content h3 {
         font-size: 34px;
+        white-space: nowrap;
     }
 
-    .experiments {
-        padding: 70px 6%;
+    .card-content p {
+        min-height: auto;
     }
 
     .database-footer {
         flex-direction: column;
         gap: 12px;
+        font-size: 7px;
     }
-}
 
-/* SMALL MOBILE */
+    /* FOOTER */
 
-@media (max-width: 360px) {
+    .footer {
+        flex-direction: column;
+        gap: 12px;
+        padding: 24px 16px;
+        font-size: 7px;
+    }
+
+    /* WORKSPACE */
+
+    .workspace-header {
+        height: 58px;
+        padding-inline: 12px;
+    }
+
     .workspace-brand {
+        gap: 7px;
+        font-size: 8px;
+        letter-spacing: 0.5px;
+    }
+
+    .workspace-close {
+        gap: 8px;
+        padding: 7px 9px;
         font-size: 8px;
     }
 
-    .workspace-divider {
-        display: none;
-    }
-
-    .workspace-heading h2 {
-        font-size: 32px;
-    }
-
-    .workspace-visual {
-        height: 280px;
+    .close-icon {
+        font-size: 20px;
     }
 
     .workspace-main {
-        min-height: 490px;
+        padding: 22px 14px;
+    }
+
+    .workspace-heading {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .workspace-heading h2 {
+        font-size: 36px;
+    }
+
+    .workspace-eyebrow,
+    .workspace-live {
+        font-size: 8px;
+    }
+
+    .workspace-visual {
+        height: 300px;
+    }
+
+    .visual-coordinate {
+        left: 10px;
+        right: 10px;
+        font-size: 7px;
+    }
+
+    .workspace-controls {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 20px;
+    }
+
+    .control-group {
+        width: 100%;
+        flex: none;
     }
 
     .control-button {
+        padding: 12px 8px;
         font-size: 8px;
-        gap: 6px;
+        gap: 7px;
+    }
+
+    .intensity-control {
+        width: 100%;
+        flex: none;
+    }
+
+    .workspace-sidebar {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 24px 16px;
+    }
+
+    .sidebar-block {
+        padding-bottom: 20px;
+    }
+
+    .sidebar-block p {
+        font-size: 11px;
+    }
+
+    .sidebar-footer {
+        grid-column: auto;
+        padding-top: 5px;
+    }
+}
+
+/* =========================================
+   VERY SMALL MOBILE
+========================================= */
+
+@media (max-width: 380px) {
+    .header {
+        padding-inline: 12px;
+    }
+
+    .logo {
+        font-size: 17px;
+    }
+
+    .navigation {
+        gap: 9px;
+    }
+
+    .navigation a {
+        font-size: 6px;
+    }
+
+    .hero h1 {
+        font-size: clamp(58px, 17vw, 66px);
+        letter-spacing: -2px;
+    }
+
+    .hero-index {
+        font-size: 7px;
+    }
+
+    .hero-footer {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .experiments {
+        padding-inline: 12px;
+    }
+
+    .experiments-intro h2 {
+        font-size: 46px;
+    }
+
+    .card-content h3 {
+        font-size: 30px;
+    }
+
+    .workspace-brand {
+        font-size: 7px;
+        gap: 5px;
+    }
+
+    .workspace-section {
+        font-size: 7px;
+    }
+
+    .workspace-heading h2 {
+        font-size: 31px;
+    }
+
+    .workspace-visual {
+        height: 260px;
+    }
+
+    .control-button {
+        font-size: 7px;
+        padding-inline: 6px;
+    }
+
+    .sidebar-label {
+        font-size: 9px;
+    }
+}
+
+/* =========================================
+   ACCESSIBILITY / MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
     }
 }

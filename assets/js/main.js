@@ -6,6 +6,38 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.m
 
 import { gsap } from "https://cdn.jsdelivr.net/npm/gsap@3.13.0/index.js";
 
+import Lenis from "https://cdn.jsdelivr.net/npm/lenis@1.3.15/+esm";
+
+/* =========================================
+   00. LENIS SMOOTH SCROLL
+========================================= */
+
+const lenis = new Lenis({
+    duration: 1.2,
+    smoothWheel: true,
+    wheelMultiplier: 1,
+    touchMultiplier: 1,
+    anchors: true,
+});
+
+/* CONNECT LENIS TO GSAP TICKER */
+
+gsap.ticker.add((time) => {
+    lenis.raf(time * 1000);
+});
+
+gsap.ticker.lagSmoothing(0);
+
+/* =========================================
+   01. FIXED HEADER SCROLL STATE
+========================================= */
+
+const header = document.querySelector(".header");
+
+lenis.on("scroll", ({ scroll }) => {
+    header?.classList.toggle("is-scrolled", scroll > 20);
+});
+
 /* =========================================
    02. DOM
 ========================================= */
@@ -1413,6 +1445,8 @@ function openWorkspace(card) {
     workspaceOpen = true;
     workspacePaused = false;
 
+    lenis.stop();
+
     // Enable workspace interaction
     workspaceElement.inert = false;
 
@@ -1493,6 +1527,8 @@ function closeWorkspace() {
 
     workspacePaused = false;
     activeWorkspaceCard = null;
+
+    lenis.start();
 
     gsap.to(".workspace-panel", {
         opacity: 0,
