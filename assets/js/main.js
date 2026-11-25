@@ -1,5 +1,5 @@
 /* =========================================
-   01. IMPORTS
+   IMPORTS
 ========================================= */
 
 import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js";
@@ -9,7 +9,7 @@ import { gsap } from "https://cdn.jsdelivr.net/npm/gsap@3.13.0/index.js";
 import Lenis from "https://cdn.jsdelivr.net/npm/lenis@1.3.15/+esm";
 
 /* =========================================
-   00. LENIS SMOOTH SCROLL
+   LENIS SMOOTH SCROLL
 ========================================= */
 
 const lenis = new Lenis({
@@ -29,7 +29,7 @@ gsap.ticker.add((time) => {
 gsap.ticker.lagSmoothing(0);
 
 /* =========================================
-   01. FIXED HEADER SCROLL STATE
+   FIXED HEADER SCROLL STATE
 ========================================= */
 
 const header = document.querySelector(".header");
@@ -39,13 +39,13 @@ lenis.on("scroll", ({ scroll }) => {
 });
 
 /* =========================================
-   02. DOM
+   DOM
 ========================================= */
 
 const canvas = document.querySelector("#webgl");
 
 /* =========================================
-   03. SCENE & CAMERA
+   SCENE & CAMERA
 ========================================= */
 
 const scene = new THREE.Scene();
@@ -55,7 +55,7 @@ const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 10);
 camera.position.z = 1;
 
 /* =========================================
-   04. RENDERER
+   RENDERER
 ========================================= */
 
 const renderer = new THREE.WebGLRenderer({
@@ -71,7 +71,7 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setClearColor(0x050609);
 
 /* =========================================
-   05. MOUSE STATE
+   MOUSE STATE
 ========================================= */
 
 const mouse = new THREE.Vector2(-2, -2);
@@ -85,7 +85,7 @@ const targetVelocity = new THREE.Vector2(0, 0);
 let mouseActive = 0;
 
 /* =========================================
-   06. POINTER EVENTS
+   POINTER EVENTS
 ========================================= */
 
 window.addEventListener("pointermove", (event) => {
@@ -116,7 +116,7 @@ window.addEventListener("pointerleave", () => {
 });
 
 /* =========================================
-   07. RENDER TARGETS
+   RENDER TARGETS
 ========================================= */
 
 const renderTargetOptions = {
@@ -146,7 +146,7 @@ let bufferB = new THREE.WebGLRenderTarget(
 );
 
 /* =========================================
-   08. FLUID SIMULATION SCENE
+   FLUID SIMULATION SCENE
 ========================================= */
 
 const fluidScene = new THREE.Scene();
@@ -156,7 +156,7 @@ const fluidCamera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 10);
 fluidCamera.position.z = 1;
 
 /* =========================================
-   09. FLUID UNIFORMS
+   FLUID UNIFORMS
 ========================================= */
 
 const fluidUniforms = {
@@ -182,7 +182,7 @@ const fluidUniforms = {
 };
 
 /* =========================================
-   10. FLUID VERTEX SHADER
+   FLUID VERTEX SHADER
 ========================================= */
 
 const fluidVertexShader = `
@@ -202,7 +202,7 @@ const fluidVertexShader = `
 `;
 
 /* =========================================
-   11. FLUID FRAGMENT SHADER
+   FLUID FRAGMENT SHADER
 ========================================= */
 
 const fluidFragmentShader = `
@@ -317,7 +317,7 @@ const fluidFragmentShader = `
 `;
 
 /* =========================================
-   12. FLUID MATERIAL
+   FLUID MATERIAL
 ========================================= */
 
 const fluidMaterial = new THREE.ShaderMaterial({
@@ -367,7 +367,7 @@ const backgroundUniforms = {
 };
 
 /* =========================================
-   15. BACKGROUND VERTEX SHADER
+   BACKGROUND VERTEX SHADER
 ========================================= */
 
 const backgroundVertexShader = `
@@ -387,7 +387,7 @@ const backgroundVertexShader = `
 `;
 
 /* =========================================
-   16. BACKGROUND FRAGMENT SHADER
+   BACKGROUND FRAGMENT SHADER
 ========================================= */
 
 const backgroundFragmentShader = `
@@ -610,7 +610,7 @@ const backgroundFragmentShader = `
 `;
 
 /* =========================================
-   17. BACKGROUND MATERIAL
+   BACKGROUND MATERIAL
 ========================================= */
 
 const backgroundMaterial = new THREE.ShaderMaterial({
@@ -622,7 +622,7 @@ const backgroundMaterial = new THREE.ShaderMaterial({
 });
 
 /* =========================================
-   18. BACKGROUND PLANE
+   BACKGROUND PLANE
 ========================================= */
 
 const backgroundPlane = new THREE.Mesh(
@@ -634,7 +634,7 @@ const backgroundPlane = new THREE.Mesh(
 scene.add(backgroundPlane);
 
 /* =========================================
-   19. RESIZE
+   RESIZE
 ========================================= */
 
 function resize() {
@@ -666,19 +666,19 @@ function resize() {
 window.addEventListener("resize", resize);
 
 /* =========================================
-   22. EXPERIMENT CARD SYSTEM
+   EXPERIMENT CARD SYSTEM
 ========================================= */
 
 const experimentCards = document.querySelectorAll(".experiment-card");
 
 /* =========================================
-   23. CARD SHADER SCENE
+   CARD SHADER SCENE
 ========================================= */
 
 const cardScenes = [];
 
 /* =========================================
-   24. CARD SHADER
+   CARD SHADER
 ========================================= */
 
 const cardVertexShader = `
@@ -1179,7 +1179,7 @@ const cardFragmentShader = `
 `;
 
 /* =========================================
-   25. CREATE CARD MATERIALS
+   CREATE CARD MATERIALS
 ========================================= */
 
 experimentCards.forEach((card, index) => {
@@ -1245,7 +1245,7 @@ experimentCards.forEach((card, index) => {
 });
 
 /* =========================================
-   20. WORKSPACE SHADER
+   WORKSPACE SHADER
 ========================================= */
 
 const workspaceElement = document.querySelector("#experiment-workspace");
@@ -1341,7 +1341,7 @@ let workspaceTimeOffset = 0;
 let activeWorkspaceCard = null;
 
 /* =========================================
-   26. CARD POINTER INTERACTION
+   CARD POINTER INTERACTION
 ========================================= */
 
 cardScenes.forEach((card) => {
@@ -1420,7 +1420,7 @@ cardScenes.forEach((card) => {
 });
 
 /* =========================================
-   21. WORKSPACE INTERACTIONS
+   WORKSPACE INTERACTIONS
 ========================================= */
 
 const pauseButton = document.querySelector("#workspace-pause");
@@ -1667,7 +1667,7 @@ workspaceVisual.addEventListener("pointerleave", () => {
 });
 
 /* =========================================
-   27. ANIMATION LOOP
+   ANIMATION LOOP
 ========================================= */
 
 const clock = new THREE.Clock();
